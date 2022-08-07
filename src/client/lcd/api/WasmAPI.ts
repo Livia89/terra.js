@@ -263,7 +263,7 @@ export class WasmAPI extends BaseAPI {
         params
       )
       .then(({ result: d }) => ({
-        data: d.data,
+        data: d?.data,
       }));
   }
 
@@ -280,7 +280,7 @@ export class WasmAPI extends BaseAPI {
         pagination: Pagination;
       }>(`/cosmwasm/wasm/v1/contract/${contractAddress}/history`, params)
       .then(d => [
-        d.entries.map(entry => HistoryEntry.fromData(entry)),
+        d.entries.map(entry => entry && HistoryEntry.fromData(entry)),
         d.pagination,
       ]);
   }
